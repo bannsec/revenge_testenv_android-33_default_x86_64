@@ -24,8 +24,10 @@ RUN apt update && apt dist-upgrade -y && \
     echo hw.keyboard=yes >> /root/.android/avd/test.avd/config.ini && \
     echo hw.dPad=yes >> /root/.android/avd/test.avd/config.ini && \
     echo hw.mainKeys=yes >> /root/.android/avd/test.avd/config.ini && \
-    echo fastboot.forceColdBoot=yes >> /root/.android/avd/test.avd/config.ini
+    echo fastboot.forceColdBoot=yes >> /root/.android/avd/test.avd/config.ini && \
+    echo hw.gpu.enabled=yes >> /root/.android/avd/test.avd/config.ini && \
+    echo hw.gpu.mode=swiftshader_indirect >> /root/.android/avd/test.avd/config.ini
 
-CMD ["/opt/emulator/emulator", "@test"]
+CMD ["/opt/emulator/emulator", "-memory", "3072", "-writable-system", "@test"]
 
 # sudo docker run -it --rm --network host --privileged -v /tmp/.X11-unix/:/tmp/.X11-unix/ -e DISPLAY=$DISPLAY -v $HOME/.Xauthority:/root/.Xauthority bannsec/revenge_testenv_android-33_default_x86_64
